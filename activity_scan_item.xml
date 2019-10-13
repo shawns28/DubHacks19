@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ScanItem">
 
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="284dp"
+        android:ems="10"
+        android:hint="Type Image Link"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
     android:id="@+id/button"
     android:layout_width="0dp"
