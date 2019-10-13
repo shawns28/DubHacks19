@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class ConfirmScreen extends AppCompatActivity {
 
@@ -30,18 +34,23 @@ public class ConfirmScreen extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMainActivity(mEditText1.getText().toString(), mEditText2.getText().toString(), mEditText3.getText().toString());
+                openMainActivity(mEditText1.getText().toString(), Integer.parseInt(mEditText2.getText().toString()), mEditText3.getText().toString());
             }
         });
     }
 
-    public void openMainActivity(String name, String quantity, String notes) {
+    public void openMainActivity(String name, int quantity, String notes) {
         Intent intent = new Intent(ConfirmScreen.this, MainActivity.class);
         ArrayList<String> itemList = getIntent().getStringArrayListExtra("ItemList");
         if (itemList == null) {
             itemList = new ArrayList<>();
         }
-        itemList.add(name);
+        Random random = new Random();
+        int day = random.nextInt(4)+14;
+        Date expirationDate = new Date(19, 9, day);
+
+        Item item = new Item(name, quantity, notes, expirationDate);
+        itemList.add(item.serialized());
         intent.putStringArrayListExtra("ItemList", itemList);
         //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("Quantity", quantity);
